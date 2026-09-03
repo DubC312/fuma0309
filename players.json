@@ -1,0 +1,8 @@
+[
+  {"id":76,"name":"Lionel Messi","club":"Inter Miami CF","competitions":["legenden"],"manual":true,"search":"Lionel Messi","pos":"ZOM","rating":89,"rarity":"Gold","tempo":76,"schuss":87,"passen":89,"dribbling":90,"defensive":33,"physis":63,"theme":"fussball","emoji":"⚽","color":"#1f6f50"},
+  {"id":77,"name":"Cristiano Ronaldo","club":"Al Nassr","competitions":["legenden"],"manual":true,"search":"Cristiano Ronaldo","pos":"ST","rating":84,"rarity":"Silver","tempo":67,"schuss":88,"passen":75,"dribbling":78,"defensive":33,"physis":75,"theme":"fussball","emoji":"⚽","color":"#1f6f50"},
+  {"id":78,"name":"Thomas Müller","club":"Vancouver Whitecaps FC","competitions":["legenden"],"manual":true,"search":"Thomas Müller","pos":"ZOM","rating":80,"rarity":"Silver","tempo":57,"schuss":79,"passen":82,"dribbling":77,"defensive":55,"physis":65,"theme":"fussball","emoji":"⚽","color":"#1f6f50"},
+  {"id":278,"name":"Marco Reus","club":"LA Galaxy","competitions":["legenden"],"manual":true},
+  {"id":279,"name":"Neymar Jr","club":"Santos","competitions":["legenden"],"manual":true},
+  {"id":280,"name":"Sadio Mané","club":"Al Nassr","competitions":["legenden"],"manual":true}
+]
