@@ -1,4 +1,4 @@
-name: FC27 Spieler direkt aktualisieren V3
+name: FC27 Spieler und Cartoons aktualisieren V4
 
 on:
   workflow_dispatch:
