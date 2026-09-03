@@ -87,3 +87,24 @@ https://www.ea.com/games/ea-sports-fc/ratings
 EA weist darauf hin, dass bestimmte Details nach dem Datenbank-Update vom
 10. September noch geändert werden können. Die wöchentliche Action übernimmt
 spätere Änderungen automatisch.
+
+V2-KORREKTUR
+------------
+Die erste Version suchte EA-Teamseiten über DuckDuckGo/Bing. Das führte in
+GitHub Actions zu 403-Fehlern. V2 verwendet KEINE Suchmaschine mehr.
+
+Für unterstützte Vereine steht die direkte offizielle EA-Männerteam-URL in
+competitions.json. Nicht sicher zuordenbare Teams werden ausdrücklich
+übersprungen. Vorhandene automatische Spieler werden bei einem späteren
+temporären EA-Fehler nicht mehr aus players.json gelöscht.
+
+Beispiele der fest hinterlegten Männerteams:
+FC Bayern München -> .../fc-bayern-munchen/21
+Borussia Dortmund -> .../borussia-dortmund/22
+Manchester City -> .../manchester-city/10
+Arsenal -> .../arsenal/1
+FC Barcelona -> .../fc-barcelona/241
+Atlético Madrid -> .../atletico-de-madrid/240
+RSC Anderlecht -> .../rsc-anderlecht/229
+Beşiktaş -> .../besiktas/327
+Celtic -> .../celtic/78

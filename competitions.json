@@ -38,7 +38,8 @@
         },
         {
           "name": "Eintracht Frankfurt",
-          "ea_url": "https://www.ea.com/games/ea-sports-fc/ratings/teams-ratings/eintracht-frankfurt/1824"
+          "ea_url": "https://www.ea.com/games/ea-sports-fc/ratings/teams-ratings/frankfurt/1824",
+          "verified": "2026-09-03"
         },
         {
           "name": "Hamburger SV",
@@ -50,7 +51,8 @@
         },
         {
           "name": "Borussia Mönchengladbach",
-          "ea_url": "https://www.ea.com/games/ea-sports-fc/ratings/teams-ratings/borussia-monchengladbach/23"
+          "ea_url": "https://www.ea.com/games/ea-sports-fc/ratings/teams-ratings/m-gladbach/23",
+          "verified": "2026-09-03"
         },
         {
           "name": "RB Leipzig",
@@ -66,7 +68,8 @@
         },
         {
           "name": "SV Elversberg",
-          "ea_url": "https://www.ea.com/games/ea-sports-fc/ratings/teams-ratings/sv-elversberg/110502"
+          "ea_url": "https://www.ea.com/games/ea-sports-fc/ratings/teams-ratings/sv-elversberg/580",
+          "verified": "2026-09-03"
         },
         {
           "name": "SV Werder Bremen",
@@ -117,8 +120,8 @@
         },
         {
           "name": "Bodø/Glimt",
-          "ea_url": null,
-          "note": "Keine verifizierte direkte EA-Männerteam-URL hinterlegt; wird übersprungen statt über Suchmaschinen gesucht."
+          "ea_url": "https://www.ea.com/games/ea-sports-fc/ratings/teams-ratings/fk-bod-glimt/918",
+          "verified": "2026-09-03"
         },
         {
           "name": "Borussia Dortmund",
@@ -130,13 +133,13 @@
         },
         {
           "name": "Como 1907",
-          "ea_url": null,
-          "note": "Keine verifizierte direkte EA-Männerteam-URL hinterlegt; wird übersprungen statt über Suchmaschinen gesucht."
+          "ea_url": "https://www.ea.com/games/ea-sports-fc/ratings/teams-ratings/como/1745",
+          "verified": "2026-09-03"
         },
         {
           "name": "Fenerbahçe",
-          "ea_url": null,
-          "note": "Keine verifizierte direkte EA-Männerteam-URL hinterlegt; wird übersprungen statt über Suchmaschinen gesucht."
+          "ea_url": "https://www.ea.com/games/ea-sports-fc/ratings/teams-ratings/fenerbahce/326",
+          "verified": "2026-09-03"
         },
         {
           "name": "Feyenoord",
@@ -148,12 +151,13 @@
         },
         {
           "name": "Inter",
-          "ea_url": "https://www.ea.com/games/ea-sports-fc/ratings/teams-ratings/inter/44"
+          "ea_url": "https://www.ea.com/games/ea-sports-fc/ratings/teams-ratings/lombardia-fc/131682",
+          "verified": "2026-09-03"
         },
         {
           "name": "LASK",
-          "ea_url": null,
-          "note": "Keine verifizierte direkte EA-Männerteam-URL hinterlegt; wird übersprungen statt über Suchmaschinen gesucht."
+          "ea_url": "https://www.ea.com/games/ea-sports-fc/ratings/teams-ratings/lask/252",
+          "verified": "2026-09-03"
         },
         {
           "name": "RB Leipzig",
@@ -161,8 +165,8 @@
         },
         {
           "name": "RC Lens",
-          "ea_url": null,
-          "note": "Keine verifizierte direkte EA-Männerteam-URL hinterlegt; wird übersprungen statt über Suchmaschinen gesucht."
+          "ea_url": "https://www.ea.com/games/ea-sports-fc/ratings/teams-ratings/rc-lens/64",
+          "verified": "2026-09-03"
         },
         {
           "name": "LOSC Lille",
@@ -178,15 +182,18 @@
         },
         {
           "name": "Manchester United",
-          "ea_url": "https://www.ea.com/games/ea-sports-fc/ratings/teams-ratings/manchester-united/11"
+          "ea_url": "https://www.ea.com/games/ea-sports-fc/ratings/teams-ratings/man-utd/11",
+          "verified": "2026-09-03"
         },
         {
           "name": "SSC Napoli",
-          "ea_url": "https://www.ea.com/games/ea-sports-fc/ratings/teams-ratings/napoli/48"
+          "ea_url": "https://www.ea.com/games/ea-sports-fc/ratings/teams-ratings/ssc-napoli/48",
+          "verified": "2026-09-03"
         },
         {
           "name": "Paris Saint-Germain",
-          "ea_url": "https://www.ea.com/games/ea-sports-fc/ratings/teams-ratings/paris-saint-germain/73"
+          "ea_url": "https://www.ea.com/games/ea-sports-fc/ratings/teams-ratings/paris-sg/73",
+          "verified": "2026-09-03"
         },
         {
           "name": "FC Porto",
@@ -206,7 +213,8 @@
         },
         {
           "name": "AS Roma",
-          "ea_url": "https://www.ea.com/games/ea-sports-fc/ratings/teams-ratings/roma/52"
+          "ea_url": "https://www.ea.com/games/ea-sports-fc/ratings/teams-ratings/as-roma/52",
+          "verified": "2026-09-03"
         },
         {
           "name": "Sabah",
@@ -238,8 +246,8 @@
         },
         {
           "name": "Viking FK",
-          "ea_url": null,
-          "note": "Keine verifizierte direkte EA-Männerteam-URL hinterlegt; wird übersprungen statt über Suchmaschinen gesucht."
+          "ea_url": "https://www.ea.com/games/ea-sports-fc/ratings/teams-ratings/viking-fk/300",
+          "verified": "2026-09-03"
         },
         {
           "name": "Villarreal CF",
@@ -278,7 +286,8 @@
         },
         {
           "name": "RC Celta",
-          "ea_url": "https://www.ea.com/games/ea-sports-fc/ratings/teams-ratings/rc-celta/450"
+          "ea_url": "https://www.ea.com/games/ea-sports-fc/ratings/teams-ratings/celta/450",
+          "verified": "2026-09-03"
         },
         {
           "name": "Celtic",
@@ -295,11 +304,13 @@
         },
         {
           "name": "GNK Dinamo Zagreb",
-          "ea_url": "https://www.ea.com/games/ea-sports-fc/ratings/teams-ratings/gnk-dinamo-zagreb/211"
+          "ea_url": "https://www.ea.com/games/ea-sports-fc/ratings/teams-ratings/dinamo-zagreb/211",
+          "verified": "2026-09-03"
         },
         {
           "name": "Ferencváros",
-          "ea_url": "https://www.ea.com/games/ea-sports-fc/ratings/teams-ratings/ferencvarosi-tc/1885"
+          "ea_url": "https://www.ea.com/games/ea-sports-fc/ratings/teams-ratings/ferencvarosi-tc/1874",
+          "verified": "2026-09-03"
         },
         {
           "name": "Hapoel Be'er Sheva",
@@ -312,8 +323,8 @@
         },
         {
           "name": "Jagiellonia Białystok",
-          "ea_url": null,
-          "note": "Keine verifizierte direkte EA-Männerteam-URL hinterlegt; wird übersprungen statt über Suchmaschinen gesucht."
+          "ea_url": "https://www.ea.com/games/ea-sports-fc/ratings/teams-ratings/jagiellonia/110745",
+          "verified": "2026-09-03"
         },
         {
           "name": "Juventus",
@@ -321,8 +332,8 @@
         },
         {
           "name": "Lech Poznań",
-          "ea_url": null,
-          "note": "Keine verifizierte direkte EA-Männerteam-URL hinterlegt; wird übersprungen statt über Suchmaschinen gesucht."
+          "ea_url": "https://www.ea.com/games/ea-sports-fc/ratings/teams-ratings/lech-poznan/873",
+          "verified": "2026-09-03"
         },
         {
           "name": "Bayer 04 Leverkusen",
@@ -335,25 +346,28 @@
         },
         {
           "name": "Lillestrøm SK",
-          "ea_url": null,
-          "note": "Keine verifizierte direkte EA-Männerteam-URL hinterlegt; wird übersprungen statt über Suchmaschinen gesucht."
+          "ea_url": "https://www.ea.com/games/ea-sports-fc/ratings/teams-ratings/lillestr-m-sk/299",
+          "verified": "2026-09-03"
         },
         {
           "name": "Olympique Lyonnais",
-          "ea_url": "https://www.ea.com/games/ea-sports-fc/ratings/teams-ratings/olympique-lyonnais/66"
+          "ea_url": "https://www.ea.com/games/ea-sports-fc/ratings/teams-ratings/ol/66",
+          "verified": "2026-09-03"
         },
         {
           "name": "AC Milan",
-          "ea_url": "https://www.ea.com/games/ea-sports-fc/ratings/teams-ratings/ac-milan/47"
+          "ea_url": "https://www.ea.com/games/ea-sports-fc/ratings/teams-ratings/milano-fc/131681",
+          "verified": "2026-09-03"
         },
         {
           "name": "Olympique de Marseille",
-          "ea_url": "https://www.ea.com/games/ea-sports-fc/ratings/teams-ratings/olympique-de-marseille/219"
+          "ea_url": "https://www.ea.com/games/ea-sports-fc/ratings/teams-ratings/om/219",
+          "verified": "2026-09-03"
         },
         {
           "name": "N.E.C.",
-          "ea_url": null,
-          "note": "Keine verifizierte direkte EA-Männerteam-URL hinterlegt; wird übersprungen statt über Suchmaschinen gesucht."
+          "ea_url": "https://www.ea.com/games/ea-sports-fc/ratings/teams-ratings/n-e-c-nijmegen/1910",
+          "verified": "2026-09-03"
         },
         {
           "name": "OFI Crete",
@@ -366,8 +380,8 @@
         },
         {
           "name": "Omonia Nicosia",
-          "ea_url": null,
-          "note": "Keine verifizierte direkte EA-Männerteam-URL hinterlegt; wird übersprungen statt über Suchmaschinen gesucht."
+          "ea_url": "https://www.ea.com/games/ea-sports-fc/ratings/teams-ratings/omonia-fc/264",
+          "verified": "2026-09-03"
         },
         {
           "name": "Real Sociedad",
@@ -379,7 +393,8 @@
         },
         {
           "name": "FC Red Bull Salzburg",
-          "ea_url": "https://www.ea.com/games/ea-sports-fc/ratings/teams-ratings/fc-red-bull-salzburg/191"
+          "ea_url": "https://www.ea.com/games/ea-sports-fc/ratings/teams-ratings/rb-salzburg/191",
+          "verified": "2026-09-03"
         },
         {
           "name": "Sparta Praha",
@@ -387,7 +402,8 @@
         },
         {
           "name": "Sturm Graz",
-          "ea_url": "https://www.ea.com/games/ea-sports-fc/ratings/teams-ratings/sturm-graz/209"
+          "ea_url": "https://www.ea.com/games/ea-sports-fc/ratings/teams-ratings/sk-sturm-graz/209",
+          "verified": "2026-09-03"
         },
         {
           "name": "Sunderland",
@@ -408,5 +424,8 @@
         }
       ]
     }
-  }
+  },
+  "ea_url_strategy": "direct_verified_team_pages_v3",
+  "ea_verification_date": "2026-09-03",
+  "notes": "V3: korrigierte und ergänzte direkte EA FC 27 Teamseiten. Nicht verifizierte Teams bleiben absichtlich ohne URL."
 }
