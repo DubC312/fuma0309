@@ -1,4 +1,4 @@
-name: FC27 Spieler direkt aktualisieren
+name: FC27 Spieler direkt aktualisieren V3
 
 on:
   workflow_dispatch:
