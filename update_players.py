@@ -220,43 +220,91 @@ def rarity(rating):
     return "Bronze"
 
 def sportsdb_enrich(rows):
-    # Step 1: resolve SportsDB IDs and team IDs.
-    for i,p in enumerate(rows,1):
-        if p.get("sportsdbId") and p.get("sportsdbTeamId"):
-            continue
-        try:
-            data=get(SPORTSDB+quote_plus(p.get("search") or p["name"])).json()
-            candidates=data.get("player") or []
-            exact=[x for x in candidates if norm(x.get("strPlayer"))==norm(p["name"])]
-            x=(exact or candidates or [None])[0]
-            if x:
-                p["sportsdbId"]=x.get("idPlayer") or p.get("sportsdbId")
-                p["sportsdbTeamId"]=x.get("idTeam") or p.get("sportsdbTeamId")
-            time.sleep(2.1)  # stay under free API rate limit
-        except Exception as e:
-            print(f"SportsDB {p['name']}: {e}")
+    """
+    V4 Cartoon-Logik:
+    - Vorhandene Cartoons bleiben erhalten.
+    - Spieler OHNE Cartoon werden erneut über die offizielle SearchPlayers-API
+      aufgelöst, auch wenn bereits alte SportsDB-IDs gespeichert sind.
+    - Sowohl die bisherige als auch eine frisch gemeldete Team-ID werden als
+      Kandidaten berücksichtigt. So gehen Cartoons nach Transfers seltener verloren.
+    - Ein Cartoon wird nur über die exakte SportsDB-Spieler-ID zugeordnet.
+    """
+    before=sum(1 for p in rows if p.get("cartoon"))
+    team_candidates={}
 
-    # Step 2: fetch each team cartoon page once and map by SportsDB player id.
-    team_ids=sorted({str(p.get("sportsdbTeamId")) for p in rows if p.get("sportsdbTeamId")})
+    # 1) Für fehlende Cartoons SportsDB-Zuordnung frisch prüfen.
+    for p in rows:
+        sid=str(p.get("sportsdbId") or "")
+        old_tid=str(p.get("sportsdbTeamId") or "")
+        tids=set([old_tid]) if old_tid else set()
+
+        if not p.get("cartoon"):
+            try:
+                data=get(SPORTSDB+quote_plus(p.get("search") or p["name"])).json()
+                candidates=data.get("player") or []
+                exact=[x for x in candidates if norm(x.get("strPlayer"))==norm(p["name"])]
+                x=(exact or candidates or [None])[0]
+                if x:
+                    fresh_sid=str(x.get("idPlayer") or "")
+                    fresh_tid=str(x.get("idTeam") or "")
+                    if fresh_sid:
+                        # Bei exaktem Namensmatch darf die alte Spieler-ID aktualisiert werden.
+                        if exact or not sid:
+                            p["sportsdbId"]=fresh_sid
+                            sid=fresh_sid
+                    if fresh_tid:
+                        tids.add(fresh_tid)
+                        # Frische Team-ID speichern; alte bleibt zusätzlich als Kandidat erhalten.
+                        p["sportsdbTeamId"]=fresh_tid
+                time.sleep(2.1)
+            except Exception as e:
+                print(f"SportsDB {p['name']}: {e}")
+
+        if sid and tids:
+            team_candidates.setdefault(sid,set()).update(tids)
+
+    # Auch Spieler mit vorhandenem Cartoon/IDs liefern Teamseiten für andere Spieler.
+    for p in rows:
+        sid=str(p.get("sportsdbId") or "")
+        tid=str(p.get("sportsdbTeamId") or "")
+        if sid and tid:
+            team_candidates.setdefault(sid,set()).add(tid)
+
+    # 2) Alle relevanten Teamseiten nur einmal laden und Cartoons per Spieler-ID sammeln.
+    all_team_ids=sorted({tid for tids in team_candidates.values() for tid in tids if tid})
     cartoon_by_id={}
-    for tid in team_ids:
+    for tid in all_team_ids:
         try:
             html=get(f"https://www.thesportsdb.com/team/{tid}?view=7#playerImages").text
             soup=BeautifulSoup(html,"html.parser")
             for a in soup.select('a[href*="/player/"]'):
                 m=re.search(r"/player/(\d+)",a.get("href",""))
                 img=a.find("img")
-                if not m or not img: continue
+                if not m or not img:
+                    continue
                 src=img.get("src") or img.get("data-src") or img.get("data-original") or ""
                 if "/images/media/player/cartoon/" in src:
                     cartoon_by_id[m.group(1)]=src
             time.sleep(.8)
         except Exception as e:
             print(f"Cartoon-Team {tid}: {e}")
+
+    # 3) Nur fehlende Cartoons ergänzen, vorhandene nicht überschreiben.
+    added=0
     for p in rows:
+        if p.get("cartoon"):
+            continue
         sid=str(p.get("sportsdbId") or "")
         if sid in cartoon_by_id:
             p["cartoon"]=cartoon_by_id[sid]
+            added+=1
+
+    after=sum(1 for p in rows if p.get("cartoon"))
+    print(f"Cartoons: vorher {before}, neu {added}, gesamt {after}/{len(rows)}")
+    missing=[p.get("name","?") for p in rows if not p.get("cartoon")]
+    if missing:
+        print(f"Ohne Cartoon: {len(missing)} Spieler")
+        print("Beispiele: "+", ".join(missing[:25]))
 
 def load_existing():
     if not PLAYERS_FILE.exists(): return []
