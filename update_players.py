@@ -4,7 +4,8 @@ from __future__ import annotations
 import json, re, time, unicodedata
 from pathlib import Path
 from urllib.parse import quote_plus, unquote, urlparse, parse_qs
-import requests
+import re
+from difflib import SequenceMatcherquests
 from bs4 import BeautifulSoup
 
 PLAYERS_FILE = Path("players.json")
@@ -18,6 +19,80 @@ SESSION.headers.update({
 EA_HOST = "https://www.ea.com"
 EA_RATINGS = f"{EA_HOST}/games/ea-sports-fc/ratings"
 SPORTSDB = "https://www.thesportsdb.com/api/v1/json/123/searchplayers.php?p="
+
+# V5: bekannte Schreibvarianten / verifizierte SportsDB-IDs.
+# Die Keys laufen durch norm(), daher können Akzente/Leerzeichen robust behandelt werden.
+SPORTSDB_NAME_ALIASES = {
+    "serhou guirassy": "Sehrou Guirassy",
+}
+SPORTSDB_ID_OVERRIDES = {
+    "serhou guirassy": "34168124",
+    "sehrou guirassy": "34168124",
+    "rodri": "34163415",
+    "pedri": "34172243",
+}
+
+def sportsdb_search_name(name):
+    return SPORTSDB_NAME_ALIASES.get(norm(name), name)
+
+def best_sportsdb_candidate(candidates, wanted_name):
+    """Exakt -> Alias-exakt -> sehr ähnlicher Name; sonst None."""
+    if not candidates:
+        return None, False
+    wanted_norm = norm(wanted_name)
+    alias_norm = norm(sportsdb_search_name(wanted_name))
+
+    exact = [x for x in candidates if norm(x.get("strPlayer")) in {wanted_norm, alias_norm}]
+    if exact:
+        return exact[0], True
+
+    scored = []
+    for x in candidates:
+        n = norm(x.get("strPlayer"))
+        if not n:
+            continue
+        score = max(
+            SequenceMatcher(None, wanted_norm, n).ratio(),
+            SequenceMatcher(None, alias_norm, n).ratio()
+        )
+        scored.append((score, x))
+    scored.sort(key=lambda t: t[0], reverse=True)
+    if scored and scored[0][0] >= 0.88:
+        return scored[0][1], True
+    return None, False
+
+def cartoon_from_player_archive(sid):
+    """
+    V5: Cartoon direkt aus dem Cartoon-Archiv des konkreten SportsDB-Spielers.
+    Gibt nur URLs aus /images/media/player/cartoon/ zurück.
+    """
+    if not sid:
+        return ""
+    url=f"https://www.thesportsdb.com/player_art.php?art=cartoon&p={sid}"
+    html=get(url, timeout=30).text
+    soup=BeautifulSoup(html, "html.parser")
+
+    # Zuerst reguläre <img>-Quellen.
+    for img in soup.find_all("img"):
+        src=img.get("src") or img.get("data-src") or img.get("data-original") or ""
+        if "/images/media/player/cartoon/" in src:
+            if src.startswith("//"):
+                src="https:"+src
+            elif src.startswith("/"):
+                src="https://www.thesportsdb.com"+src
+            return src
+
+    # Fallback: manche Archive setzen die URL in HTML/JS/CSS.
+    m=re.search(r'((?:https?:)?//[^"\'\s<>]+/images/media/player/cartoon/[^"\'\s<>]+)', html)
+    if m:
+        src=m.group(1)
+        if src.startswith("//"):
+            src="https:"+src
+        return src
+    m=re.search(r'(/images/media/player/cartoon/[^"\'\s<>]+)', html)
+    if m:
+        return "https://www.thesportsdb.com"+m.group(1)
+    return ""
 POSITION_SET = {"GK","CB","LB","RB","LWB","RWB","CDM","CM","CAM","LM","RM","LW","RW","CF","ST"}
 
 TEAM_ALIASES = {
@@ -221,56 +296,79 @@ def rarity(rating):
 
 def sportsdb_enrich(rows):
     """
-    V4 Cartoon-Logik:
-    - Vorhandene Cartoons bleiben erhalten.
-    - Spieler OHNE Cartoon werden erneut über die offizielle SearchPlayers-API
-      aufgelöst, auch wenn bereits alte SportsDB-IDs gespeichert sind.
-    - Sowohl die bisherige als auch eine frisch gemeldete Team-ID werden als
-      Kandidaten berücksichtigt. So gehen Cartoons nach Transfers seltener verloren.
-    - Ein Cartoon wird nur über die exakte SportsDB-Spieler-ID zugeordnet.
+    V5 Cartoon-Logik:
+    1) Vorhandene Cartoons bleiben erhalten.
+    2) Bei fehlendem Cartoon wird die SportsDB-Spielerzuordnung neu geprüft.
+       Schreibvarianten (z.B. Serhou -> Sehrou Guirassy) werden berücksichtigt.
+    3) Danach wird zuerst das Cartoon-Archiv des konkreten Spielers über seine
+       SportsDB-ID geprüft.
+    4) Erst danach werden wie bisher die Teamseiten als zweite Cartoon-Quelle geprüft.
+    5) Es werden ausschließlich /player/cartoon/-Bilder als Cartoon gespeichert.
     """
     before=sum(1 for p in rows if p.get("cartoon"))
     team_candidates={}
+    archive_added=0
 
-    # 1) Für fehlende Cartoons SportsDB-Zuordnung frisch prüfen.
-    for p in rows:
+    # 1) Fehlende Spieler-IDs/Schreibvarianten frisch auflösen und Player-Archive prüfen.
+    for idx,p in enumerate(rows, 1):
+        if p.get("cartoon"):
+            sid=str(p.get("sportsdbId") or "")
+            tid=str(p.get("sportsdbTeamId") or "")
+            if sid and tid:
+                team_candidates.setdefault(sid,set()).add(tid)
+            continue
+
+        wanted=p.get("search") or p.get("name") or ""
+        wanted_norm=norm(p.get("name") or wanted)
         sid=str(p.get("sportsdbId") or "")
         old_tid=str(p.get("sportsdbTeamId") or "")
         tids=set([old_tid]) if old_tid else set()
 
-        if not p.get("cartoon"):
+        # Verifizierte IDs haben Vorrang.
+        override_sid=SPORTSDB_ID_OVERRIDES.get(wanted_norm)
+        if override_sid:
+            sid=override_sid
+            p["sportsdbId"]=override_sid
+
+        try:
+            query=sportsdb_search_name(wanted)
+            data=get(SPORTSDB+quote_plus(query)).json()
+            candidates=data.get("player") or []
+            x, trusted = best_sportsdb_candidate(candidates, p.get("name") or wanted)
+
+            if x:
+                fresh_sid=str(x.get("idPlayer") or "")
+                fresh_tid=str(x.get("idTeam") or "")
+                if fresh_sid and (trusted or not sid):
+                    # Ein verifizierter Override wird nicht durch einen abweichenden
+                    # unsicheren Suchtreffer überschrieben.
+                    if not override_sid or fresh_sid == override_sid:
+                        p["sportsdbId"]=fresh_sid
+                        sid=fresh_sid
+                if fresh_tid:
+                    tids.add(fresh_tid)
+                    p["sportsdbTeamId"]=fresh_tid
+
+            time.sleep(2.1)
+        except Exception as e:
+            print(f"SportsDB Suche {p.get('name','?')}: {e}")
+
+        # V5-Kern: direktes Player-Cartoon-Archiv.
+        if sid and not p.get("cartoon"):
             try:
-                data=get(SPORTSDB+quote_plus(p.get("search") or p["name"])).json()
-                candidates=data.get("player") or []
-                exact=[x for x in candidates if norm(x.get("strPlayer"))==norm(p["name"])]
-                x=(exact or candidates or [None])[0]
-                if x:
-                    fresh_sid=str(x.get("idPlayer") or "")
-                    fresh_tid=str(x.get("idTeam") or "")
-                    if fresh_sid:
-                        # Bei exaktem Namensmatch darf die alte Spieler-ID aktualisiert werden.
-                        if exact or not sid:
-                            p["sportsdbId"]=fresh_sid
-                            sid=fresh_sid
-                    if fresh_tid:
-                        tids.add(fresh_tid)
-                        # Frische Team-ID speichern; alte bleibt zusätzlich als Kandidat erhalten.
-                        p["sportsdbTeamId"]=fresh_tid
-                time.sleep(2.1)
+                src=cartoon_from_player_archive(sid)
+                if src and "/images/media/player/cartoon/" in src:
+                    p["cartoon"]=src
+                    archive_added+=1
+                    print(f"Cartoon-Archiv: {p.get('name')} -> {sid}")
+                time.sleep(.8)
             except Exception as e:
-                print(f"SportsDB {p['name']}: {e}")
+                print(f"Cartoon-Archiv {p.get('name','?')} ({sid}): {e}")
 
         if sid and tids:
             team_candidates.setdefault(sid,set()).update(tids)
 
-    # Auch Spieler mit vorhandenem Cartoon/IDs liefern Teamseiten für andere Spieler.
-    for p in rows:
-        sid=str(p.get("sportsdbId") or "")
-        tid=str(p.get("sportsdbTeamId") or "")
-        if sid and tid:
-            team_candidates.setdefault(sid,set()).add(tid)
-
-    # 2) Alle relevanten Teamseiten nur einmal laden und Cartoons per Spieler-ID sammeln.
+    # 2) Teamseiten als zusätzliche Quelle für weiterhin fehlende Cartoons.
     all_team_ids=sorted({tid for tids in team_candidates.values() for tid in tids if tid})
     cartoon_by_id={}
     for tid in all_team_ids:
@@ -284,27 +382,31 @@ def sportsdb_enrich(rows):
                     continue
                 src=img.get("src") or img.get("data-src") or img.get("data-original") or ""
                 if "/images/media/player/cartoon/" in src:
+                    if src.startswith("//"):
+                        src="https:"+src
+                    elif src.startswith("/"):
+                        src="https://www.thesportsdb.com"+src
                     cartoon_by_id[m.group(1)]=src
             time.sleep(.8)
         except Exception as e:
             print(f"Cartoon-Team {tid}: {e}")
 
-    # 3) Nur fehlende Cartoons ergänzen, vorhandene nicht überschreiben.
-    added=0
+    team_added=0
     for p in rows:
         if p.get("cartoon"):
             continue
         sid=str(p.get("sportsdbId") or "")
         if sid in cartoon_by_id:
             p["cartoon"]=cartoon_by_id[sid]
-            added+=1
+            team_added+=1
 
     after=sum(1 for p in rows if p.get("cartoon"))
-    print(f"Cartoons: vorher {before}, neu {added}, gesamt {after}/{len(rows)}")
+    print(f"Cartoons: vorher {before}, neu Archiv {archive_added}, neu Team {team_added}, gesamt {after}/{len(rows)}")
     missing=[p.get("name","?") for p in rows if not p.get("cartoon")]
     if missing:
         print(f"Ohne Cartoon: {len(missing)} Spieler")
         print("Beispiele: "+", ".join(missing[:25]))
+
 
 def load_existing():
     if not PLAYERS_FILE.exists(): return []
