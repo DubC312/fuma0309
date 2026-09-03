@@ -12,108 +12,400 @@
       "title": "Bundesliga",
       "top_n": 11,
       "teams": [
-        "1. FC Köln",
-        "1. FSV Mainz 05",
-        "Borussia Dortmund",
-        "FC Augsburg",
-        "FC Bayern München",
-        "FC Schalke 04",
-        "Eintracht Frankfurt",
-        "Hamburger SV",
-        "Bayer 04 Leverkusen",
-        "Borussia Mönchengladbach",
-        "RB Leipzig",
-        "SC Freiburg",
-        "SC Paderborn 07",
-        "SV Elversberg",
-        "SV Werder Bremen",
-        "TSG Hoffenheim",
-        "1. FC Union Berlin",
-        "VfB Stuttgart"
+        {
+          "name": "1. FC Köln",
+          "ea_url": "https://www.ea.com/games/ea-sports-fc/ratings/teams-ratings/1-fc-koln/31"
+        },
+        {
+          "name": "1. FSV Mainz 05",
+          "ea_url": "https://www.ea.com/games/ea-sports-fc/ratings/teams-ratings/1-fsv-mainz-05/169"
+        },
+        {
+          "name": "Borussia Dortmund",
+          "ea_url": "https://www.ea.com/games/ea-sports-fc/ratings/teams-ratings/borussia-dortmund/22"
+        },
+        {
+          "name": "FC Augsburg",
+          "ea_url": "https://www.ea.com/games/ea-sports-fc/ratings/teams-ratings/fc-augsburg/100409"
+        },
+        {
+          "name": "FC Bayern München",
+          "ea_url": "https://www.ea.com/games/ea-sports-fc/ratings/teams-ratings/fc-bayern-munchen/21"
+        },
+        {
+          "name": "FC Schalke 04",
+          "ea_url": "https://www.ea.com/games/ea-sports-fc/ratings/teams-ratings/fc-schalke-04/34"
+        },
+        {
+          "name": "Eintracht Frankfurt",
+          "ea_url": "https://www.ea.com/games/ea-sports-fc/ratings/teams-ratings/eintracht-frankfurt/1824"
+        },
+        {
+          "name": "Hamburger SV",
+          "ea_url": "https://www.ea.com/games/ea-sports-fc/ratings/teams-ratings/hamburger-sv/28"
+        },
+        {
+          "name": "Bayer 04 Leverkusen",
+          "ea_url": "https://www.ea.com/games/ea-sports-fc/ratings/teams-ratings/leverkusen/32"
+        },
+        {
+          "name": "Borussia Mönchengladbach",
+          "ea_url": "https://www.ea.com/games/ea-sports-fc/ratings/teams-ratings/borussia-monchengladbach/23"
+        },
+        {
+          "name": "RB Leipzig",
+          "ea_url": "https://www.ea.com/games/ea-sports-fc/ratings/teams-ratings/rb-leipzig/112172"
+        },
+        {
+          "name": "SC Freiburg",
+          "ea_url": "https://www.ea.com/games/ea-sports-fc/ratings/teams-ratings/sc-freiburg/25"
+        },
+        {
+          "name": "SC Paderborn 07",
+          "ea_url": "https://www.ea.com/games/ea-sports-fc/ratings/teams-ratings/sc-paderborn-07/10030"
+        },
+        {
+          "name": "SV Elversberg",
+          "ea_url": "https://www.ea.com/games/ea-sports-fc/ratings/teams-ratings/sv-elversberg/110502"
+        },
+        {
+          "name": "SV Werder Bremen",
+          "ea_url": "https://www.ea.com/games/ea-sports-fc/ratings/teams-ratings/sv-werder-bremen/38"
+        },
+        {
+          "name": "TSG Hoffenheim",
+          "ea_url": "https://www.ea.com/games/ea-sports-fc/ratings/teams-ratings/tsg-hoffenheim/10029"
+        },
+        {
+          "name": "1. FC Union Berlin",
+          "ea_url": "https://www.ea.com/games/ea-sports-fc/ratings/teams-ratings/union-berlin/1831"
+        },
+        {
+          "name": "VfB Stuttgart",
+          "ea_url": "https://www.ea.com/games/ea-sports-fc/ratings/teams-ratings/vfb-stuttgart/36"
+        }
       ]
     },
     "champions": {
       "title": "Champions League",
       "top_n": 11,
       "teams": [
-        "AEK Athens",
-        "Arsenal",
-        "Aston Villa",
-        "Atlético de Madrid",
-        "FC Barcelona",
-        "FC Bayern München",
-        "Bodø/Glimt",
-        "Borussia Dortmund",
-        "Club Brugge",
-        "Como 1907",
-        "Fenerbahçe",
-        "Feyenoord",
-        "Galatasaray",
-        "Inter",
-        "LASK",
-        "RB Leipzig",
-        "RC Lens",
-        "LOSC Lille",
-        "Liverpool",
-        "Manchester City",
-        "Manchester United",
-        "SSC Napoli",
-        "Paris Saint-Germain",
-        "FC Porto",
-        "PSV",
-        "Real Betis",
-        "Real Madrid",
-        "AS Roma",
-        "Sabah",
-        "Shakhtar Donetsk",
-        "Slavia Praha",
-        "Slovan Bratislava",
-        "Sporting CP",
-        "VfB Stuttgart",
-        "Viking FK",
-        "Villarreal CF"
+        {
+          "name": "AEK Athens",
+          "ea_url": null,
+          "note": "Keine verifizierte direkte EA-Männerteam-URL hinterlegt; wird übersprungen statt über Suchmaschinen gesucht."
+        },
+        {
+          "name": "Arsenal",
+          "ea_url": "https://www.ea.com/games/ea-sports-fc/ratings/teams-ratings/arsenal/1"
+        },
+        {
+          "name": "Aston Villa",
+          "ea_url": "https://www.ea.com/games/ea-sports-fc/ratings/teams-ratings/aston-villa/2"
+        },
+        {
+          "name": "Atlético de Madrid",
+          "ea_url": "https://www.ea.com/games/ea-sports-fc/ratings/teams-ratings/atletico-de-madrid/240"
+        },
+        {
+          "name": "FC Barcelona",
+          "ea_url": "https://www.ea.com/games/ea-sports-fc/ratings/teams-ratings/fc-barcelona/241"
+        },
+        {
+          "name": "FC Bayern München",
+          "ea_url": "https://www.ea.com/games/ea-sports-fc/ratings/teams-ratings/fc-bayern-munchen/21"
+        },
+        {
+          "name": "Bodø/Glimt",
+          "ea_url": null,
+          "note": "Keine verifizierte direkte EA-Männerteam-URL hinterlegt; wird übersprungen statt über Suchmaschinen gesucht."
+        },
+        {
+          "name": "Borussia Dortmund",
+          "ea_url": "https://www.ea.com/games/ea-sports-fc/ratings/teams-ratings/borussia-dortmund/22"
+        },
+        {
+          "name": "Club Brugge",
+          "ea_url": "https://www.ea.com/games/ea-sports-fc/ratings/teams-ratings/club-brugge/231"
+        },
+        {
+          "name": "Como 1907",
+          "ea_url": null,
+          "note": "Keine verifizierte direkte EA-Männerteam-URL hinterlegt; wird übersprungen statt über Suchmaschinen gesucht."
+        },
+        {
+          "name": "Fenerbahçe",
+          "ea_url": null,
+          "note": "Keine verifizierte direkte EA-Männerteam-URL hinterlegt; wird übersprungen statt über Suchmaschinen gesucht."
+        },
+        {
+          "name": "Feyenoord",
+          "ea_url": "https://www.ea.com/games/ea-sports-fc/ratings/teams-ratings/feyenoord/246"
+        },
+        {
+          "name": "Galatasaray",
+          "ea_url": "https://www.ea.com/games/ea-sports-fc/ratings/teams-ratings/galatasaray/325"
+        },
+        {
+          "name": "Inter",
+          "ea_url": "https://www.ea.com/games/ea-sports-fc/ratings/teams-ratings/inter/44"
+        },
+        {
+          "name": "LASK",
+          "ea_url": null,
+          "note": "Keine verifizierte direkte EA-Männerteam-URL hinterlegt; wird übersprungen statt über Suchmaschinen gesucht."
+        },
+        {
+          "name": "RB Leipzig",
+          "ea_url": "https://www.ea.com/games/ea-sports-fc/ratings/teams-ratings/rb-leipzig/112172"
+        },
+        {
+          "name": "RC Lens",
+          "ea_url": null,
+          "note": "Keine verifizierte direkte EA-Männerteam-URL hinterlegt; wird übersprungen statt über Suchmaschinen gesucht."
+        },
+        {
+          "name": "LOSC Lille",
+          "ea_url": "https://www.ea.com/games/ea-sports-fc/ratings/teams-ratings/losc-lille/65"
+        },
+        {
+          "name": "Liverpool",
+          "ea_url": "https://www.ea.com/games/ea-sports-fc/ratings/teams-ratings/liverpool/9"
+        },
+        {
+          "name": "Manchester City",
+          "ea_url": "https://www.ea.com/games/ea-sports-fc/ratings/teams-ratings/manchester-city/10"
+        },
+        {
+          "name": "Manchester United",
+          "ea_url": "https://www.ea.com/games/ea-sports-fc/ratings/teams-ratings/manchester-united/11"
+        },
+        {
+          "name": "SSC Napoli",
+          "ea_url": "https://www.ea.com/games/ea-sports-fc/ratings/teams-ratings/napoli/48"
+        },
+        {
+          "name": "Paris Saint-Germain",
+          "ea_url": "https://www.ea.com/games/ea-sports-fc/ratings/teams-ratings/paris-saint-germain/73"
+        },
+        {
+          "name": "FC Porto",
+          "ea_url": "https://www.ea.com/games/ea-sports-fc/ratings/teams-ratings/fc-porto/236"
+        },
+        {
+          "name": "PSV",
+          "ea_url": "https://www.ea.com/games/ea-sports-fc/ratings/teams-ratings/psv/247"
+        },
+        {
+          "name": "Real Betis",
+          "ea_url": "https://www.ea.com/games/ea-sports-fc/ratings/teams-ratings/real-betis/449"
+        },
+        {
+          "name": "Real Madrid",
+          "ea_url": "https://www.ea.com/games/ea-sports-fc/ratings/teams-ratings/real-madrid/243"
+        },
+        {
+          "name": "AS Roma",
+          "ea_url": "https://www.ea.com/games/ea-sports-fc/ratings/teams-ratings/roma/52"
+        },
+        {
+          "name": "Sabah",
+          "ea_url": null,
+          "note": "Keine verifizierte direkte EA-Männerteam-URL hinterlegt; wird übersprungen statt über Suchmaschinen gesucht."
+        },
+        {
+          "name": "Shakhtar Donetsk",
+          "ea_url": null,
+          "note": "Keine verifizierte direkte EA-Männerteam-URL hinterlegt; wird übersprungen statt über Suchmaschinen gesucht."
+        },
+        {
+          "name": "Slavia Praha",
+          "ea_url": null,
+          "note": "Keine verifizierte direkte EA-Männerteam-URL hinterlegt; wird übersprungen statt über Suchmaschinen gesucht."
+        },
+        {
+          "name": "Slovan Bratislava",
+          "ea_url": null,
+          "note": "Keine verifizierte direkte EA-Männerteam-URL hinterlegt; wird übersprungen statt über Suchmaschinen gesucht."
+        },
+        {
+          "name": "Sporting CP",
+          "ea_url": "https://www.ea.com/games/ea-sports-fc/ratings/teams-ratings/sporting-cp/237"
+        },
+        {
+          "name": "VfB Stuttgart",
+          "ea_url": "https://www.ea.com/games/ea-sports-fc/ratings/teams-ratings/vfb-stuttgart/36"
+        },
+        {
+          "name": "Viking FK",
+          "ea_url": null,
+          "note": "Keine verifizierte direkte EA-Männerteam-URL hinterlegt; wird übersprungen statt über Suchmaschinen gesucht."
+        },
+        {
+          "name": "Villarreal CF",
+          "ea_url": "https://www.ea.com/games/ea-sports-fc/ratings/teams-ratings/villarreal-cf/483"
+        }
       ]
     },
     "europa": {
       "title": "Europa League",
       "top_n": 5,
       "teams": [
-        "RSC Anderlecht",
-        "Ararat-Armenia",
-        "AZ Alkmaar",
-        "SL Benfica",
-        "Beşiktaş",
-        "AFC Bournemouth",
-        "RC Celta",
-        "Celtic",
-        "NK Celje",
-        "Crystal Palace",
-        "GNK Dinamo Zagreb",
-        "Ferencváros",
-        "Hapoel Be'er Sheva",
-        "TSG Hoffenheim",
-        "Jagiellonia Białystok",
-        "Juventus",
-        "Lech Poznań",
-        "Bayer 04 Leverkusen",
-        "Levski Sofia",
-        "Lillestrøm SK",
-        "Olympique Lyonnais",
-        "AC Milan",
-        "Olympique de Marseille",
-        "N.E.C.",
-        "OFI Crete",
-        "Olympiacos",
-        "Omonia Nicosia",
-        "Real Sociedad",
-        "Stade Rennais",
-        "FC Red Bull Salzburg",
-        "Sparta Praha",
-        "Sturm Graz",
-        "Sunderland",
-        "Torreense",
-        "Union Saint-Gilloise",
-        "Viktoria Plzeň"
+        {
+          "name": "RSC Anderlecht",
+          "ea_url": "https://www.ea.com/games/ea-sports-fc/ratings/teams-ratings/rsc-anderlecht/229"
+        },
+        {
+          "name": "Ararat-Armenia",
+          "ea_url": null,
+          "note": "Keine verifizierte direkte EA-Männerteam-URL hinterlegt; wird übersprungen statt über Suchmaschinen gesucht."
+        },
+        {
+          "name": "AZ Alkmaar",
+          "ea_url": "https://www.ea.com/games/ea-sports-fc/ratings/teams-ratings/az/1906"
+        },
+        {
+          "name": "SL Benfica",
+          "ea_url": "https://www.ea.com/games/ea-sports-fc/ratings/teams-ratings/sl-benfica/234"
+        },
+        {
+          "name": "Beşiktaş",
+          "ea_url": "https://www.ea.com/games/ea-sports-fc/ratings/teams-ratings/besiktas/327"
+        },
+        {
+          "name": "AFC Bournemouth",
+          "ea_url": "https://www.ea.com/games/ea-sports-fc/ratings/teams-ratings/afc-bournemouth/1943"
+        },
+        {
+          "name": "RC Celta",
+          "ea_url": "https://www.ea.com/games/ea-sports-fc/ratings/teams-ratings/rc-celta/450"
+        },
+        {
+          "name": "Celtic",
+          "ea_url": "https://www.ea.com/games/ea-sports-fc/ratings/teams-ratings/celtic/78"
+        },
+        {
+          "name": "NK Celje",
+          "ea_url": null,
+          "note": "Keine verifizierte direkte EA-Männerteam-URL hinterlegt; wird übersprungen statt über Suchmaschinen gesucht."
+        },
+        {
+          "name": "Crystal Palace",
+          "ea_url": "https://www.ea.com/games/ea-sports-fc/ratings/teams-ratings/crystal-palace/1799"
+        },
+        {
+          "name": "GNK Dinamo Zagreb",
+          "ea_url": "https://www.ea.com/games/ea-sports-fc/ratings/teams-ratings/gnk-dinamo-zagreb/211"
+        },
+        {
+          "name": "Ferencváros",
+          "ea_url": "https://www.ea.com/games/ea-sports-fc/ratings/teams-ratings/ferencvarosi-tc/1885"
+        },
+        {
+          "name": "Hapoel Be'er Sheva",
+          "ea_url": null,
+          "note": "Keine verifizierte direkte EA-Männerteam-URL hinterlegt; wird übersprungen statt über Suchmaschinen gesucht."
+        },
+        {
+          "name": "TSG Hoffenheim",
+          "ea_url": "https://www.ea.com/games/ea-sports-fc/ratings/teams-ratings/tsg-hoffenheim/10029"
+        },
+        {
+          "name": "Jagiellonia Białystok",
+          "ea_url": null,
+          "note": "Keine verifizierte direkte EA-Männerteam-URL hinterlegt; wird übersprungen statt über Suchmaschinen gesucht."
+        },
+        {
+          "name": "Juventus",
+          "ea_url": "https://www.ea.com/games/ea-sports-fc/ratings/teams-ratings/juventus/45"
+        },
+        {
+          "name": "Lech Poznań",
+          "ea_url": null,
+          "note": "Keine verifizierte direkte EA-Männerteam-URL hinterlegt; wird übersprungen statt über Suchmaschinen gesucht."
+        },
+        {
+          "name": "Bayer 04 Leverkusen",
+          "ea_url": "https://www.ea.com/games/ea-sports-fc/ratings/teams-ratings/leverkusen/32"
+        },
+        {
+          "name": "Levski Sofia",
+          "ea_url": null,
+          "note": "Keine verifizierte direkte EA-Männerteam-URL hinterlegt; wird übersprungen statt über Suchmaschinen gesucht."
+        },
+        {
+          "name": "Lillestrøm SK",
+          "ea_url": null,
+          "note": "Keine verifizierte direkte EA-Männerteam-URL hinterlegt; wird übersprungen statt über Suchmaschinen gesucht."
+        },
+        {
+          "name": "Olympique Lyonnais",
+          "ea_url": "https://www.ea.com/games/ea-sports-fc/ratings/teams-ratings/olympique-lyonnais/66"
+        },
+        {
+          "name": "AC Milan",
+          "ea_url": "https://www.ea.com/games/ea-sports-fc/ratings/teams-ratings/ac-milan/47"
+        },
+        {
+          "name": "Olympique de Marseille",
+          "ea_url": "https://www.ea.com/games/ea-sports-fc/ratings/teams-ratings/olympique-de-marseille/219"
+        },
+        {
+          "name": "N.E.C.",
+          "ea_url": null,
+          "note": "Keine verifizierte direkte EA-Männerteam-URL hinterlegt; wird übersprungen statt über Suchmaschinen gesucht."
+        },
+        {
+          "name": "OFI Crete",
+          "ea_url": null,
+          "note": "Keine verifizierte direkte EA-Männerteam-URL hinterlegt; wird übersprungen statt über Suchmaschinen gesucht."
+        },
+        {
+          "name": "Olympiacos",
+          "ea_url": "https://www.ea.com/games/ea-sports-fc/ratings/teams-ratings/olympiacos-fc/280"
+        },
+        {
+          "name": "Omonia Nicosia",
+          "ea_url": null,
+          "note": "Keine verifizierte direkte EA-Männerteam-URL hinterlegt; wird übersprungen statt über Suchmaschinen gesucht."
+        },
+        {
+          "name": "Real Sociedad",
+          "ea_url": "https://www.ea.com/games/ea-sports-fc/ratings/teams-ratings/real-sociedad/457"
+        },
+        {
+          "name": "Stade Rennais",
+          "ea_url": "https://www.ea.com/games/ea-sports-fc/ratings/teams-ratings/stade-rennais-fc/74"
+        },
+        {
+          "name": "FC Red Bull Salzburg",
+          "ea_url": "https://www.ea.com/games/ea-sports-fc/ratings/teams-ratings/fc-red-bull-salzburg/191"
+        },
+        {
+          "name": "Sparta Praha",
+          "ea_url": "https://www.ea.com/games/ea-sports-fc/ratings/teams-ratings/sparta-praha/267"
+        },
+        {
+          "name": "Sturm Graz",
+          "ea_url": "https://www.ea.com/games/ea-sports-fc/ratings/teams-ratings/sturm-graz/209"
+        },
+        {
+          "name": "Sunderland",
+          "ea_url": "https://www.ea.com/games/ea-sports-fc/ratings/teams-ratings/sunderland/106"
+        },
+        {
+          "name": "Torreense",
+          "ea_url": null,
+          "note": "Keine verifizierte direkte EA-Männerteam-URL hinterlegt; wird übersprungen statt über Suchmaschinen gesucht."
+        },
+        {
+          "name": "Union Saint-Gilloise",
+          "ea_url": "https://www.ea.com/games/ea-sports-fc/ratings/teams-ratings/union-saint-gilloise/110724"
+        },
+        {
+          "name": "Viktoria Plzeň",
+          "ea_url": "https://www.ea.com/games/ea-sports-fc/ratings/teams-ratings/viktoria-plzen/110468"
+        }
       ]
     }
   }

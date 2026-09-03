@@ -161,58 +161,32 @@ def row_player(row, canonical_team):
         **vals
     }
 
-def fetch_team_players(team, top_n, url_cache):
-    url = url_cache.get(team) or discover_ea_url(team)
-    if not url:
-        raise RuntimeError(f"Keine EA-Teamseite gefunden: {team}")
-    url_cache[team]=url
-    print(f"EA: {team} -> {url}")
-    html=get(url).text
+def fetch_team_players(team, top_n, ea_url):
+    if not ea_url:
+        raise RuntimeError(f"Keine direkte EA-Männerteam-URL hinterlegt: {team}")
+    print(f"EA direkt: {team} -> {ea_url}")
+    html=get(ea_url).text
     soup=BeautifulSoup(html,"html.parser")
-    rows=[]
-    seen=set()
+
+    # Safety: reject women's team pages explicitly.
+    page_text=" ".join(soup.stripped_strings).casefold()
+    women_markers=("women’s super league","women's super league","frauen-bundesliga","liga f moeve",
+                   "arkema première ligue","national women's soccer league","nwsl")
+    if any(x in page_text for x in women_markers):
+        raise RuntimeError(f"EA-URL zeigt auf ein Frauenteam: {ea_url}")
+
+    rows=[]; seen=set()
     for tr in soup.select("tr"):
-        p=row_player(tr, team)
+        p=row_player(tr,team)
         if p and p.get("eaId") not in seen:
             rows.append(p); seen.add(p.get("eaId"))
-    # fallback: some builds use div/grid instead of tr
     if len(rows)<top_n:
-        for a in soup.select('a[href*="/ratings/player-ratings/"]'):
-            parent=a
-            for _ in range(6):
-                parent=parent.parent if parent else None
-                if not parent: break
-                txt=" ".join(parent.stripped_strings)
-                if re.search(r"(?:OVR|GES)\s*\d{1,2}",txt) and re.search(r"(?:PAC|TEM)\s*\d{1,2}",txt):
-                    class Dummy:
-                        def __init__(self,node): self.node=node
-                        def select_one(self,q): return self.node.select_one(q)
-                        @property
-                        def stripped_strings(self): return self.node.stripped_strings
-                    p=row_player(Dummy(parent),team)
-                    if p and p.get("eaId") not in seen:
-                        rows.append(p); seen.add(p.get("eaId"))
-                    break
-    if len(rows)<top_n:
-        print(f"  WARNUNG: nur {len(rows)} statt {top_n} Spieler gefunden.")
-    # EA team pages are already ordered by rank; keep first N.
+        raise RuntimeError(f"EA-Seite gelesen, aber nur {len(rows)} auswertbare Spieler gefunden (benötigt {top_n})")
     return rows[:top_n]
 
 def discover_player_url(name, club=""):
-    query=f'site:ea.com/games/ea-sports-fc/ratings/player-ratings "{name}"'
-    if club: query+=f' "{club}"'
-    try:
-        html=get("https://html.duckduckgo.com/html/?q="+quote_plus(query)).text
-        soup=BeautifulSoup(html,"html.parser")
-        for a in soup.select("a[href]"):
-            href=a.get("href","")
-            if "uddg=" in href:
-                try: href=unquote(parse_qs(urlparse(href).query).get("uddg",[""])[0])
-                except Exception: pass
-            if "/ratings/player-ratings/" in href and "ea.com" in href:
-                return href.split("?")[0]
-    except Exception:
-        pass
+    # Bewusst keine Suchmaschine mehr im GitHub-Workflow.
+    # Bei manuellen Spielern bleiben vorhandene FC-Werte erhalten.
     return None
 
 def parse_player_page(url, fallback):
@@ -312,9 +286,13 @@ def main():
 
     for comp_id,comp in cfg["competitions"].items():
         n=int(comp["top_n"])
-        for team in comp["teams"]:
+        for team_cfg in comp["teams"]:
+            if isinstance(team_cfg,str):
+                team=team_cfg; ea_url=None
+            else:
+                team=team_cfg["name"]; ea_url=team_cfg.get("ea_url")
             try:
-                ps=fetch_team_players(team,n,team_url_cache)
+                ps=fetch_team_players(team,n,ea_url)
             except Exception as e:
                 failures.append(f"{comp_id}: {team}: {e}")
                 print("FEHLER",failures[-1]); continue
@@ -350,6 +328,15 @@ def main():
             except Exception as e: print(f"EA Einzelspieler {name}: {e}")
         key=("ea",rec.get("eaId")) if rec.get("eaId") else ("manual",norm(name),norm(club))
         merged[key]=rec
+
+    # Sicherheitsnetz: Wenn eine EA-Seite vorübergehend ausfällt, vorhandene
+    # automatische Spieler NICHT aus players.json löschen.
+    present_names={norm(x.get("name")) for x in merged.values()}
+    for old in existing:
+        if old.get("manual") is True:
+            continue
+        if norm(old.get("name")) not in present_names:
+            merged[("preserved",str(old.get("id") or norm(old.get("name"))))]=dict(old)
 
     rows=list(merged.values())
 
