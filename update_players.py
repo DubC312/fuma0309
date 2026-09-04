@@ -5,7 +5,8 @@ import json, re, time, unicodedata
 from pathlib import Path
 from urllib.parse import quote_plus, unquote, urlparse, parse_qs
 import re
-from difflib import SequenceMatcherquests
+from difflib import SequenceMatcher
+import requests
 from bs4 import BeautifulSoup
 
 PLAYERS_FILE = Path("players.json")
