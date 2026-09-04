@@ -1,167 +1,123 @@
 # ⚽ Fußball-Mathe-Trainer
 
-Ein browserbasierter Mathe-Trainer mit Fußball-Sammelkarten.  
-Für richtig gelöste Aufgaben können Spielerkarten gesammelt und in einem Album nach Wettbewerben und Vereinen angesehen werden.
+## Finale Version: Cartoon Only · Hologramm + Glitzer
 
-## Funktionen
+Ein browserbasierter Mathe-Trainer für Kinder, bei dem richtig gelöste
+Aufgaben mit sammelbaren Fußball-Spielerkarten belohnt werden.
 
-- Rechenarten: Mal, Plus, Minus, Geteilt, Division mit Rest und Mix
-- Wählbare Trainingsdauer: 5, 7, 10 oder 15 Minuten
-- Nach jeweils 10 richtigen Aufgaben gibt es eine Spielerkarte
-- Sammelalbum mit Bundesliga, Champions League, Europa League und Legenden
-- Kartenwerte aus EA SPORTS FC 27
-- Cartoon-Spielerbilder über TheSportsDB
-- Automatische Aktualisierung der Spielerdaten über GitHub Actions
-- Für iPad und andere Browser geeignet
-- PWA-Unterstützung über Manifest und Service Worker
+Diese Version ist die **endgültige Cartoon-only-Version**. In der App
+werden ausschließlich Spieler angezeigt, für die ein Cartoon-Bild
+vorhanden ist. Die Legenden-Karten besitzen einen besonderen **lila
+Hologramm- und Glitzereffekt**.
 
-## Zwei mögliche Versionen der App
+## ✨ Funktionen
 
-### 1. Standard-Version
+-   Matheaufgaben spielerisch üben
+-   Sammelbare Fußball-Spielerkarten als Belohnung
+-   Karte nach jeweils 10 richtigen Antworten
+-   Ausgegraute, noch nicht gesammelte Karten im Album
+-   Bundesliga, Champions League, Europa League und Legenden
+-   Spielerwerte auf Basis von EA SPORTS FC 27
+-   Cartoon-Spielerbilder von TheSportsDB
+-   Automatische Aktualisierung über GitHub Actions
+-   Für iPad, Smartphone und Desktop geeignet
+-   PWA-Nutzung über GitHub Pages
+-   Lokaler Sammelfortschritt im Browser
 
-Die normale `index.html` zeigt alle Spieler aus `players.json`.
+## 🎨 Kartendesign
 
-Wenn für einen Spieler ein Cartoon vorhanden ist, wird dieser bevorzugt angezeigt. Fehlt ein Cartoon, kann die App auf ein normales TheSportsDB-Spielerbild zurückgreifen. Wenn auch dort kein Bild vorhanden ist, werden die Initialen angezeigt.
+**Gold:** goldfarbener, plastischer Hintergrund.
 
-### 2. Cartoon-only-Version
+**Silber:** metallisch-silberner Hintergrund.
 
-Die Datei `index-cartoon-only.html` ist die alternative Variante.
+**Bronze:** dunkler Bronze-/Kupfer-Hintergrund.
 
-Hier werden ausschließlich Spieler verwendet, für die in `players.json` bereits ein Cartoon hinterlegt ist. Spieler ohne Cartoon erscheinen weder im Sammelalbum noch als neue Belohnung.
+**Legenden:** lila Premium-Hintergrund mit einem weichen, wandernden
+Hologramm-Lichtschein und dezenten Glitzerreflexen. Dieser Effekt ist
+ausschließlich den Legenden vorbehalten.
 
-Wichtig: Die vollständige `players.json` wird trotzdem nicht gekürzt. Dadurch kann der automatische Updater weiterhin alle Spieler prüfen. Sobald später ein Cartoon gefunden wird, erscheint dieser Spieler automatisch auch in der Cartoon-only-Version.
+## 🖼️ Cartoon Only
 
-Für den Einsatz auf GitHub Pages einfach die gewünschte Variante in `index.html` umbenennen.
+Die finale App zeigt **nur Spieler mit vorhandenem Cartoon** an. Die
+`players.json` wird dabei ausdrücklich **nicht** gekürzt.
 
-## Wichtige Dateien
+``` js
+const allPlayers = await (await fetch('players.json')).json();
 
-- `index.html` – eigentliche Mathe-App
-- `players.json` – Spielerliste, Kartenwerte, Wettbewerbe und Cartoon-URLs
-- `update_players.py` – automatischer Spieler-/Cartoon-Updater
-- `competitions.json` – Vereine und Wettbewerbs-Konfiguration für den Updater
-- `.github/workflows/update-players.yml` – GitHub-Action für die automatische Aktualisierung
-- `service-worker.js` – Offline-/Cache-Funktion der App
-- `manifest.webmanifest` – PWA-Einstellungen
+players = allPlayers.filter(
+  p => typeof p.cartoon === 'string' && p.cartoon.trim() !== ''
+);
+```
 
-## Automatischer wöchentlicher Updater
+Die vollständige Spielerliste bleibt im Hintergrund erhalten. Hat ein
+Spieler heute noch keinen Cartoon, kann der Updater ihn weiterhin
+prüfen. Wird später ein Cartoon gefunden, erscheint der Spieler
+automatisch in der App.
 
-Der Updater läuft über GitHub Actions einmal pro Woche.
+## 🔄 Automatische Aktualisierung
 
-Er prüft unter anderem:
+Wichtige Dateien:
 
-1. ob sich Spielerwerte bei EA SPORTS FC 27 geändert haben,
-2. ob neue bzw. aktualisierte Spieler in den konfigurierten Mannschaften vorhanden sind,
-3. ob für Spieler ein Cartoon-Bild gefunden werden kann,
-4. ob vorhandene Daten in `players.json` aktualisiert werden müssen.
+``` text
+update_players.py
+.github/workflows/update-players.yml
+competitions.json
+players.json
+```
 
-Die erzeugte `players.json` wird anschließend automatisch in das Repository zurückgeschrieben.
+Der GitHub-Workflow prüft regelmäßig unter anderem:
 
-Der Updater kann außerdem jederzeit manuell gestartet werden:
+-   EA SPORTS FC 27 Spielerwerte
+-   Spieler und Vereinszuordnungen
+-   Wettbewerbsdaten
+-   TheSportsDB-Daten
+-   neu verfügbare Cartoon-Bilder
 
-**GitHub → Actions → „FC27 Spieler und Cartoons aktualisieren V5“ → Run workflow**
+Der Workflow kann außerdem manuell gestartet werden:
 
-## Wichtig bei der Cartoon-only-Version
+**GitHub → Actions → FC27 Spieler und Cartoons aktualisieren V5 → Run
+workflow**
 
-Für die Cartoon-only-Version darf `players.json` **nicht** manuell auf die Spieler mit Cartoon reduziert werden.
+Die vollständige aktuelle `players.json` sollte niemals durch eine alte
+Starter-Version ersetzt werden.
 
-Die App filtert die Spieler erst beim Laden im Browser. In `players.json` müssen weiterhin auch Spieler ohne Cartoon stehen, damit der wöchentliche Updater sie erneut prüfen kann.
+## ⚽ Kartenwerte
 
-Beispiel:
+Verwendet werden Gesamtbewertung, Tempo, Schuss, Passen, Dribbling,
+Defensive und Physis.
 
-- Heute hat ein Spieler keinen Cartoon → er wird in der Cartoon-only-App nicht angezeigt.
-- Der Spieler bleibt trotzdem in `players.json`.
-- Beim nächsten automatischen Lauf wird erneut nach einem Cartoon gesucht.
-- Wird später ein Cartoon gefunden, trägt der Updater die URL in `players.json` ein.
-- Danach erscheint die Karte automatisch in der Cartoon-only-App.
+Die App verwendet **keine originalen EA-Spielerkarten oder
+EA-Kartengrafiken**. Sie besitzt ein eigenes Kartendesign und verwendet
+Spielerwerte als Daten.
 
-## Neue Spieler hinzufügen
+## 🏆 Album-Kategorien
 
-Manuelle Spieler können in `players.json` ergänzt werden. Für dauerhaft manuell gepflegte Einträge sollte das bestehende Format des Projekts beibehalten werden, insbesondere `manual: true`.
+``` text
+bundesliga
+champions
+europa
+legenden
+```
 
-Der Updater versucht anschließend, passende EA-/TheSportsDB-Daten zu ergänzen, soweit die aktuelle Updater-Logik dafür einen Treffer findet.
+Ein Spieler kann mehreren Kategorien angehören. Er behält dabei dieselbe
+interne ID, sodass eine gesammelte Karte nicht mehrfach gespeichert
+werden muss.
 
-Vor manuellen Änderungen an `players.json` empfiehlt sich eine Sicherungskopie.
+## ⭐ Legenden
 
-## Kartenwerte
+Manuell gepflegte Legenden können beispielsweise so in `players.json`
+hinterlegt werden:
 
-Die Kartenwerte orientieren sich an den EA SPORTS FC 27 Ratings.
+``` json
+{"name":"Spielername","club":"Verein","competitions":["legenden"],"manual":true}
+```
 
-Verwendet werden unter anderem:
+Der Updater versucht anschließend, passende Werte und weitere Daten zu
+ergänzen.
 
-- Gesamtwertung
-- Tempo
-- Schuss
-- Passen
-- Dribbling
-- Defensive
-- Physis
+## 📁 Projektstruktur
 
-Die Daten dienen in diesem Projekt als Werte für die Sammelkarten. Es werden keine originalen EA-Kartengrafiken verwendet.
-
-## Bilder und Quellenhinweis
-
-Cartoon- und gegebenenfalls Ersatzbilder stammen von TheSportsDB.
-
-In der App ist deshalb ein Quellen-/Rechtehinweis eingebaut:
-
-> Spieler-Cartoonbilder und Ersatzbilder: TheSportsDB  
-> © Bild-/Artwork-Rechte bei den jeweiligen Rechteinhabern. TheSportsDB wird als Bildquelle genannt.
-
-Die Nennung der Quelle bedeutet nicht automatisch, dass jedes dort verfügbare Bild frei von Rechten Dritter ist.
-
-## GitHub Pages
-
-Für die Veröffentlichung sollte die gewünschte App-Version als `index.html` im Repository liegen.
-
-Nach einer Änderung:
-
-1. Datei in GitHub hochladen bzw. ersetzen.
-2. Änderung committen.
-3. Kurz warten, bis GitHub Pages neu bereitgestellt wurde.
-4. App im Browser neu laden.
-
-Auf dem iPad kann es wegen des Service Workers vorkommen, dass zunächst noch eine ältere Version angezeigt wird. In diesem Fall die Seite neu laden bzw. die Web-App vollständig schließen und erneut öffnen.
-
-## Service Worker und `players.json`
-
-Der Service Worker ist so ausgelegt, dass `players.json` möglichst aktuell geladen wird. Dadurch können neue Werte und Cartoon-URLs aus dem wöchentlichen Update in der App erscheinen, ohne dass jedes Mal die `index.html` geändert werden muss.
-
-## Sammelfortschritt
-
-Der Sammelfortschritt wird im Browser über `localStorage` gespeichert.
-
-Das bedeutet:
-
-- Ein Update von `players.json` löscht den bisherigen Sammelfortschritt normalerweise nicht.
-- Derselbe Spieler behält seine Karten-ID, soweit der Updater bestehende IDs erhalten kann.
-- Ein Spieler kann gleichzeitig in mehreren Wettbewerben erscheinen, bleibt aber dieselbe gesammelte Karte.
-
-## Hinweise zum Updater
-
-Der aktuelle Updater verwendet direkte EA-Teamseiten, damit er nicht von Suchmaschinen wie DuckDuckGo oder Bing abhängig ist.
-
-Einige Mannschaften können nicht automatisch verarbeitet werden, wenn keine passende EA-Teamseite hinterlegt bzw. verfügbar ist. Der Workflow ist so gebaut, dass ein einzelner fehlgeschlagener Verein nicht die komplette Aktualisierung stoppen soll.
-
-### Hinweis zu TheSportsDB
-
-Die derzeitige Cartoon-Erkennung verwendet neben API-Abfragen auch TheSportsDB-Webseiten zur Ermittlung von Cartoon-Artwork. Die Nutzungsbedingungen von TheSportsDB sollten deshalb bei einer öffentlichen oder weitergegebenen Version des Projekts berücksichtigt und regelmäßig geprüft werden.
-
-## Empfohlene Sicherung
-
-Vor größeren Änderungen am Projekt am besten diese Dateien sichern:
-
-- `index.html`
-- `players.json`
-- `update_players.py`
-- `competitions.json`
-- `.github/workflows/update-players.yml`
-- `service-worker.js`
-
-So kann jederzeit auf eine funktionierende Version zurückgegangen werden.
-
-## Projektstruktur
-
-```text
+``` text
 /
 ├── index.html
 ├── players.json
@@ -169,17 +125,89 @@ So kann jederzeit auf eine funktionierende Version zurückgegangen werden.
 ├── update_players.py
 ├── service-worker.js
 ├── manifest.webmanifest
-├── bg.jpeg
+├── README.md
 └── .github/
     └── workflows/
         └── update-players.yml
 ```
 
-## Kurz gesagt
+Die finale Datei `index-cartoon-only-hologramm-glitzer.html` wird im
+veröffentlichten Repository als **`index.html`** verwendet.
 
-Die `index.html` steuert die Darstellung und das Mathe-Spiel.  
-Die `players.json` enthält die Spielerkarten.  
-`update_players.py` aktualisiert die Daten.  
-GitHub Actions startet diesen Updater automatisch jede Woche.
+## 🌐 GitHub Pages und iPad
 
-Bei der Cartoon-only-Version bleiben trotzdem **alle Spieler in `players.json`**, damit fehlende Cartoons bei zukünftigen Läufen weiterhin gefunden werden können.
+Die Dateien werden in das GitHub-Repository hochgeladen und GitHub Pages
+wird unter **Settings → Pages** aktiviert. Auf dem iPad kann die Seite
+anschließend in Safari geöffnet und über **„Zum Home-Bildschirm"** wie
+eine App installiert werden.
+
+## 💾 Sammelfortschritt
+
+Der Sammelfortschritt wird lokal im Browser gespeichert. Ein
+Benutzerkonto oder Server für Spielstände ist nicht notwendig.
+
+Beim Löschen der Browser- oder Websitedaten kann der Fortschritt
+verloren gehen.
+
+## 🧩 Service Worker
+
+Der Service Worker übernimmt die PWA- und Cache-Funktion. Für
+`players.json` sollte die vorhandene Network-first-Logik erhalten
+bleiben, damit möglichst die aktuelle Spielerliste geladen wird.
+
+Nach größeren Änderungen an der App kann die Cache-Version erhöht
+werden, damit Geräte die neue Version zuverlässig laden.
+
+## 🖼️ Bildquelle
+
+Spieler-Cartoonbilder stammen von **TheSportsDB**.
+
+Die App enthält den sichtbaren Hinweis:
+
+> Spieler-Cartoonbilder: TheSportsDB\
+> © Bild-/Artwork-Rechte bei den jeweiligen Rechteinhabern. TheSportsDB
+> wird als Bildquelle genannt.
+
+Die Cartoon-only-Version verwendet **keine normalen Spielerfotos als
+Ersatz**, wenn kein Cartoon vorhanden ist.
+
+### Hinweis zu TheSportsDB
+
+Die derzeitige automatische Cartoon-Erkennung verwendet neben
+API-Abfragen auch TheSportsDB-Webseiten zur Ermittlung von
+Cartoon-Artwork. Die jeweils aktuellen Nutzungsbedingungen von
+TheSportsDB sollten deshalb insbesondere bei einer öffentlichen
+Veröffentlichung oder Weitergabe des Projekts geprüft und berücksichtigt
+werden.
+
+## 🛠️ Wichtig bei Änderungen
+
+**`players.json` nicht auf die Cartoon-Spieler reduzieren.**
+
+Die Cartoon-only-Auswahl erfolgt ausschließlich in `index.html`. Nur
+dadurch kann der Updater weiterhin Spieler ohne Cartoon prüfen und sie
+später automatisch aufnehmen.
+
+Vor größeren Änderungen empfiehlt sich ein Backup von:
+
+``` text
+index.html
+players.json
+competitions.json
+update_players.py
+service-worker.js
+.github/workflows/update-players.yml
+```
+
+## ✅ Endgültige Version
+
+**Cartoon Only · Hologramm + Glitzer**
+
+Diese Version kombiniert ausschließlich Cartoon-Spielerkarten,
+automatisch aktualisierte Spielerdaten, vier Album-Kategorien, die
+gewählten Gold-/Silber-/Bronze-Designs sowie besondere lila
+Legenden-Karten mit kombiniertem Hologramm- und Glitzereffekt.
+
+Die vollständige Spielerdatenbank bleibt im Hintergrund erhalten, sodass
+Spieler mit neu verfügbaren Cartoons bei späteren Updates automatisch in
+der App erscheinen können.
