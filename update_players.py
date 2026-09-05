@@ -291,8 +291,8 @@ def parse_player_page(url, fallback):
 
 def rarity(rating):
     if rating>=90: return "Legende"
-    if rating>=80: return "Gold"
-    if rating>=70: return "Silber"
+    if rating>=85: return "Gold"
+    if rating>=80: return "Silber"
     return "Bronze"
 
 def sportsdb_enrich(rows):
