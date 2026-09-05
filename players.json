@@ -635,4 +635,9 @@
   {"id":278,"name":"Marco Reus","search":"Marco Reus","club":"LA Galaxy","competitions":["restderwelt"],"manual":true,"rarity":"Bronze","theme":"fussball","emoji":"⚽","color":"#1f6f50","sportsdbId":"34154863","sportsdbTeamId":"134153","cartoon":"https://r2.thesportsdb.com/images/media/player/cartoon/85j8z81776413096.png/medium"},
   {"id":279,"name":"Neymar Jr","search":"Neymar Jr","club":"Santos","competitions":["restderwelt"],"manual":true,"rarity":"Bronze","theme":"fussball","emoji":"⚽","color":"#1f6f50","sportsdbId":"34146371","sportsdbTeamId":"134286"},
   {"id":78,"name":"Thomas Müller","search":"Thomas Müller","club":"Vancouver Whitecaps FC","competitions":["restderwelt"],"manual":true,"pos":"ZOM","rating":80,"rarity":"Silber","tempo":57,"schuss":79,"passen":82,"dribbling":77,"defensive":55,"physis":65,"theme":"fussball","emoji":"⚽","color":"#1f6f50","sportsdbId":"34146699","sportsdbTeamId":"134147","cartoon":"https://r2.thesportsdb.com/images/media/player/cartoon/uoal1v1770542289.png/medium"}
+  {"name":"Robert Lewandowski","club":"Chicago Fire","competitions":["restderwelt"],"manual":true}
+  {"name":"Luis Suarez","club":"Inter Miami CF","competitions":["restderwelt"],"manual":true}
+  {"name":"Hugo Lloris","club":"Los Angeles FC","competitions":["restderwelt"],"manual":true}
+  {"name":"Heung-Min Son","club":"Los Angeles FC","competitions":["restderwelt"],"manual":true}
+  {"name":"James Rodriguez","club":"Minnesota United","competitions":["restderwelt"],"manual":true}
 ]
