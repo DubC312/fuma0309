@@ -96,7 +96,7 @@ Spielerwerte als Daten.
 bundesliga
 champions
 europa
-legenden
+Rest der Welt
 ```
 
 Ein Spieler kann mehreren Kategorien angehören. Er behält dabei dieselbe
