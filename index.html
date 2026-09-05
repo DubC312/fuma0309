@@ -218,7 +218,7 @@ button.active{background:var(--green-deep);box-shadow:0 0 0 3px #fff8 inset}
   box-shadow:0 12px 26px #0003;
   min-height:420px;
 }
-.card.Legend{
+.card.Legende{
   color:white;
   border:1px solid rgba(224,196,255,.62);
   background:linear-gradient(135deg,#160d35 0%,#48216d 30%,#8652a8 56%,#35205f 78%,#160d35 100%);
@@ -226,7 +226,7 @@ button.active{background:var(--green-deep);box-shadow:0 0 0 3px #fff8 inset}
 }
 
 /* Legenden: Hologramm + dezenter Glitzereffekt */
-.card.Legend::before{
+.card.Legende::before{
   content:"";
   position:absolute;
   z-index:-1;
@@ -242,10 +242,10 @@ button.active{background:var(--green-deep);box-shadow:0 0 0 3px #fff8 inset}
     rgba(255,220,126,.15) 56%,
     transparent 66%);
   opacity:.86;
-  animation:legendHolo 4.8s ease-in-out infinite;
+  animation:legendeHolo 4.8s ease-in-out infinite;
 }
 
-.card.Legend::after{
+.card.Legende::after{
   content:"";
   position:absolute;
   z-index:-1;
@@ -258,14 +258,14 @@ button.active{background:var(--green-deep);box-shadow:0 0 0 3px #fff8 inset}
     radial-gradient(circle at 27% 62%,rgba(255,255,255,.90) 0 1.1px,transparent 2.3px),
     radial-gradient(circle at 61% 79%,rgba(255,231,167,.95) 0 1px,transparent 2.2px),
     radial-gradient(circle at 39% 35%,rgba(222,190,255,.90) 0 .8px,transparent 2px);
-  animation:legendComboSparkle 2.6s ease-in-out infinite alternate;
+  animation:legendeComboSparkle 2.6s ease-in-out infinite alternate;
 }
 
-@keyframes legendHolo{
+@keyframes legendeHolo{
   0%,20%{transform:translateX(-28%)}
   70%,100%{transform:translateX(34%)}
 }
-@keyframes legendComboSparkle{
+@keyframes legendeComboSparkle{
   0%{opacity:.12;filter:brightness(.85)}
   30%{opacity:.72;filter:brightness(1.25)}
   58%{opacity:.25;filter:brightness(.95)}
@@ -609,7 +609,11 @@ body.meme67-shake .ipad-tip{
   </section>
 </main>
 
-
+<footer class="source-note">
+  Spieler-Cartoonbilder und Ersatzbilder:
+  <a href="https://www.thesportsdb.com/" target="_blank" rel="noopener noreferrer">TheSportsDB</a><br>
+  © Bild-/Artwork-Rechte bei den jeweiligen Rechteinhabern. TheSportsDB wird als Bildquelle genannt.
+</footer>
 
 
 <div id="rewardOverlay" class="reward-overlay" hidden>
@@ -1034,7 +1038,7 @@ function renderAlbum(){
     {id:'bundesliga',icon:'🇩🇪',title:'Bundesliga'},
     {id:'champions',icon:'🏆',title:'Champions League'},
     {id:'europa',icon:'🟠',title:'Europa League'},
-    {id:'legenden',icon:'⭐',title:'Legenden'}
+    {id:'restderwelt',icon:'⭐',title:'Rest der Welt'}
   ];
 
   definitions.forEach(def=>{
